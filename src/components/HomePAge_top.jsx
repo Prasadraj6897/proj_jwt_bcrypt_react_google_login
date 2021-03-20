@@ -48,7 +48,7 @@ let HomePage_top = () =>{
                                 className="white-text text-center text-md-left col-md-6 mt-xl-5 mb-5"
                             >
                                 <h1 className="h1-responsive font-weight-bold">
-                                    Sign up right now!
+                                    Sign in right now!
                                 </h1>
                                 <hr className="hr-light" />
                                 <h6 className="mb-4">
@@ -67,15 +67,15 @@ let HomePage_top = () =>{
                                     <MDBCard id="classic-card">
                                         <MDBCardBody className="white-text">
                                             <h3 className="text-center">
-                                            <MDBIcon icon="user" /> Register:
+                                            <MDBIcon icon="user" /> Login:
                                             </h3>
                                             <hr className="hr-light" />
-                                            <MDBInput
+                                            {/* <MDBInput
                                                 className="white-text"
                                                 iconClass="white-text"
                                                 label="Your name"
                                                 icon="user"
-                                            />
+                                            /> */}
                                             <MDBInput
                                                 className="white-text"
                                                 iconClass="white-text"
@@ -90,7 +90,7 @@ let HomePage_top = () =>{
                                                 type="password"
                                             />
                                             <div className="text-center mt-4 black-text">
-                                            <MDBBtn color="indigo">Sign Up</MDBBtn>
+                                            <MDBBtn color="indigo">Sign In</MDBBtn>
                                             <hr className="hr-light" />
                                             <div className="text-center d-flex justify-content-center white-label">
                                                 <a href="#!" className="p-2 m-2">

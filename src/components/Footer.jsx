@@ -21,17 +21,21 @@ let Footer = () => {
                             <Link to="/">Home</Link>
                         </li>
                         <li className="list-unstyled">
-                            <Link to="/aboutus">Abot us</Link>
+                            <Link to="/aboutus">Blog</Link>
                         </li>
                         <li className="list-unstyled">
-                            <Link to="/features">Services</Link>
+                            <Link to="/features">Features</Link>
                         </li>
                         <li className="list-unstyled">
                             <Link to="/pricing">Pricing</Link>
                         </li>
+                        <li className="list-unstyled">
+                            <Link to="/contactus">ContactUs</Link>
+                        </li>
                         </ul>
                     </MDBCol>
                     <MDBCol md="4">
+                        
                         <h5 className="title">Location</h5>
                         <MDBListGroup style={{ width: "22rem" }} className ="mb-2 "success>
                             <MDBListGroupItem className="d-flex justify-content-between align-items-center text-dark" success >Sector 63, Bangalore

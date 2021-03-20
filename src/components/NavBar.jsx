@@ -11,7 +11,7 @@ let NavBar =()=>{
       }
     return (
         
-            <MDBNavbar color="primary-color-dark" dark expand="md" scrollingNavbarOffset={50}  fixed="top">
+            <MDBNavbar color="primary-color-dark" dark expand="sm" scrollingNavbarOffset={25}  fixed="top">
                 <MDBNavbarBrand>
                 {/* <MDBAnimation type="bounce" infinite>
                     <img className="img-fluid" size = "sm" alt="" src="https://mdbootstrap.com/img/logo/mdb-transparent-250px.png" />
@@ -21,7 +21,7 @@ let NavBar =()=>{
                 <MDBNavbarToggler onClick={toggleCollapse} />
                 <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
                     <MDBNavbarNav left>
-                        <MDBNavItem active>
+                        <MDBNavItem >
                             <MDBNavLink to="/">Home</MDBNavLink>
                         </MDBNavItem>
                         <MDBNavItem>
@@ -61,10 +61,8 @@ let NavBar =()=>{
                                     <MDBIcon icon="user" />
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu className="dropdown-default">
-                                    <MDBDropdownItem href="#!">Action</MDBDropdownItem>
-                                    <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
-                                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                                    <MDBDropdownItem href="#!">Login</MDBDropdownItem>
+                                    <MDBDropdownItem href="#!">Sign-Up</MDBDropdownItem>
                                 </MDBDropdownMenu>
                             </MDBDropdown>
                         </MDBNavItem>
