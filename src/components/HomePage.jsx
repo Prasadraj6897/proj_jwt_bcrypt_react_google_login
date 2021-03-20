@@ -1,6 +1,6 @@
 import React, {useEffect} from "react"
 // import NavBar from "./NavBar"
-// import {MDBContainer} from  "mdbreact";
+import {MDBContainer} from  "mdbreact";
 // import Footer from "./Footer"
 import 'mdbreact/dist/css/mdb.css'
 import HomePage_top from "./HomePAge_top"

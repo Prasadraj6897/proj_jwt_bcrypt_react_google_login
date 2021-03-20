@@ -10,7 +10,7 @@ let NavBar =()=>{
     setisOpen(true);
       }
     return (
-        
+        <div>
             <MDBNavbar color="primary-color-dark" dark expand="sm" scrollingNavbarOffset={25}  fixed="top">
                 <MDBNavbarBrand>
                 {/* <MDBAnimation type="bounce" infinite>
@@ -61,15 +61,15 @@ let NavBar =()=>{
                                     <MDBIcon icon="user" />
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu className="dropdown-default">
-                                    <MDBDropdownItem href="#!">Login</MDBDropdownItem>
-                                    <MDBDropdownItem href="#!">Sign-Up</MDBDropdownItem>
+                                    {/* <MDBDropdownItem href="#!">Login</MDBDropdownItem> */}
+                                    <MDBDropdownItem href="/signup">Sign-Up</MDBDropdownItem>
                                 </MDBDropdownMenu>
                             </MDBDropdown>
                         </MDBNavItem>
                     </MDBNavbarNav>
                 </MDBCollapse>
             </MDBNavbar>
-        
+        </div>
     )
 }
 export default NavBar;

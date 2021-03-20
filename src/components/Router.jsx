@@ -8,13 +8,14 @@ import Pricing from "./Pricing"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
 import ContactPage from "./contactus"
+import RegisterPage from "./RegisterPage"
 
 let Routes = () =>{
 
     useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
-      
+
     return (
         <React.Fragment>
             
@@ -26,6 +27,7 @@ let Routes = () =>{
                         <Route  path = "/aboutus"  component = {AboutUs} />
                         <Route  path = "/pricing"  component = {Pricing} />
                         <Route  path = "/contactus"  component = {ContactPage} />
+                        <Route  path = "/signup"  component = {RegisterPage} />
                     </Switch>
                     <Footer />
                 </Router>
