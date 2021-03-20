@@ -1,22 +1,28 @@
 import React, {useState, useEffect} from "react"
+import {useDispatch, useSelector} from "react-redux"
 import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
-
-
+import {signup_action} from "../redux/action_reducer/action"
+import {useHistory} from "react-router-dom"
 let RegisterPage = () =>{
 
     useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
-
-    let [userdata, setuserdata] = useState({fname: '',lname: '',email: '',city: '',state: '', zip: ''});
+    const usedispatch = useDispatch();
+    let history = useHistory()
+    let [userdata, setuserdata] = useState({fname: '',lname: '',email: '',city: '',state: '', zip: '', password:'',confirmPassword:''});
 
     let submitHandler = (event) => {
         event.preventDefault();
         event.target.className += ' was-validated';
+        //sending userData to action/invoke api
+        console.log(userdata);
+        usedispatch(signup_action(userdata, history))
         };
     
     let changeHandler = (event) => {
-        setuserdata({ [event.target.name]: event.target.value })
+        setuserdata({ 
+            ...userdata, [event.target.name]: event.target.value })
     }
     return(
         <MDBContainer className="mt-10">
@@ -133,6 +139,39 @@ let RegisterPage = () =>{
                                 Please provide a valid zip.
                                 </div>
                                 <div className='valid-feedback ml-3 pl-3'>Looks good!</div>
+                            </MDBInput>
+                        </MDBCol>
+                        <MDBCol md='4'>
+                            <MDBInput
+                                icon='map-marked-alt'
+                                value={userdata.password}
+                                onChange={changeHandler}
+                                type='text'
+                                id='materialFormRegisterPasswordEx4'
+                                name='password'
+                                label='Password'
+                                outline
+                                required
+                            >
+                                {/* <div className='invalid-feedback ml-3 pl-3'>
+                                    Please provide a valid P.
+                                </div>
+                                <div className='valid-feedback ml-3 pl-3'>Looks good!</div> */}
+                            </MDBInput>
+                        </MDBCol>
+                        <MDBCol md='4'>
+                            <MDBInput
+                                icon='location-arrow'
+                                value={userdata.confirmPassword}
+                                onChange={changeHandler}
+                                type='text'
+                                id='materialFormRegisterPasswordEx4'
+                                name='confirmPassword'
+                                label='Password'
+                                outline
+                                required
+                            >
+                                
                             </MDBInput>
                         </MDBCol>
                     </MDBRow>

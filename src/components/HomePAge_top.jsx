@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useState} from "react"
 
 import {
     MDBNavbar,
@@ -18,27 +18,50 @@ import {
     MDBCard,
     MDBCardBody,
     MDBInput,
-    MDBFormInline,
+    MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter,
     MDBAnimation
   } from "mdbreact";
   import "./css/HomePageTop.css"
+  import {useDispatch, useSelector} from "react-redux"
+  import {login_action} from "../redux/action_reducer/action"
 
 
 import 'mdbreact/dist/css/mdb.css'
 
 let HomePage_top = () =>{
 
-    // const overlay = (
-    //     <div
-    //       id="sidenav-overlay"
-    //       style={{ backgroundColor: "transparent" }}
-    //       onClick={this.toggleCollapse("navbarCollapse")}
-    //     />
-    // )
+    const usedispatch = useDispatch();
+    
+    let [logindata, setlogindata] = useState({email: '', password:''});
+    let [modal, setmodal] = useState(false);
+    
+    
+    let submitHandler = (event) => {
+        event.preventDefault();
+        
+        //sending userData to action/invoke api
+        console.log(logindata);
+        usedispatch(login_action(logindata))
+        setmodal(true)
+    }
+    
+    
+    let changeHandler = (event) => {
+        setlogindata({ 
+            ...logindata, [event.target.name]: event.target.value })
+    }
 
+    let user_list = useSelector((state) =>{
+        return state.User_root_reducer
+    })
+    let toggle = () => {
+        setmodal(!modal)
+  
+      }
     return (
         <div id="classicformpage">
             <MDBView>
+            
                 <MDBMask className="d-flex justify-content-center align-items-center gradient">
                     <MDBContainer>
                         <MDBRow>
@@ -51,6 +74,7 @@ let HomePage_top = () =>{
                                     Sign in right now!
                                 </h1>
                                 <hr className="hr-light" />
+                                {/* <pre>{JSON.stringify(user_list)}</pre> */}
                                 <h6 className="mb-4">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Rem repellendus quasi fuga nesciunt dolorum nulla magnam
@@ -81,6 +105,8 @@ let HomePage_top = () =>{
                                                 iconClass="white-text"
                                                 label="Your email"
                                                 icon="envelope"
+                                                name='email'
+                                                onChange={changeHandler}
                                             />
                                             <MDBInput
                                                 className="white-text"
@@ -88,33 +114,35 @@ let HomePage_top = () =>{
                                                 label="Your password"
                                                 icon="lock"
                                                 type="password"
+                                                name='password'
+                                                onChange={changeHandler}
                                             />
                                             <div className="text-center mt-4 black-text">
-                                            <MDBBtn color="indigo">Sign In</MDBBtn>
-                                            <hr className="hr-light" />
-                                            <div className="text-center d-flex justify-content-center white-label">
-                                                <a href="#!" className="p-2 m-2">
-                                                <MDBIcon
-                                                    fab
-                                                    icon="twitter"
-                                                    className="white-text"
-                                                />
-                                                </a>
-                                                <a href="#!" className="p-2 m-2">
-                                                <MDBIcon
-                                                    fab
-                                                    icon="linkedin"
-                                                    className="white-text"
-                                                />
-                                                </a>
-                                                <a href="#!" className="p-2 m-2">
-                                                <MDBIcon
-                                                    fab
-                                                    icon="instagram"
-                                                    className="white-text"
-                                                />
-                                                </a>
-                                            </div>
+                                                <MDBBtn color="indigo" onClick ={submitHandler}>Sign In</MDBBtn>
+                                                <hr className="hr-light" />
+                                                <div className="text-center d-flex justify-content-center white-label">
+                                                    <a href="#!" className="p-2 m-2">
+                                                    <MDBIcon
+                                                        fab
+                                                        icon="twitter"
+                                                        className="white-text"
+                                                    />
+                                                    </a>
+                                                    <a href="#!" className="p-2 m-2">
+                                                    <MDBIcon
+                                                        fab
+                                                        icon="linkedin"
+                                                        className="white-text"
+                                                    />
+                                                    </a>
+                                                    <a href="#!" className="p-2 m-2">
+                                                    <MDBIcon
+                                                        fab
+                                                        icon="instagram"
+                                                        className="white-text"
+                                                    />
+                                                    </a>
+                                                </div>
                                             </div>
                                         </MDBCardBody>
                                     </MDBCard>
@@ -139,6 +167,18 @@ let HomePage_top = () =>{
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
+
+            <MDBModal isOpen={modal} toggle={toggle}>
+                <MDBModalHeader toggle={toggle}>MDBModal title</MDBModalHeader>
+                    <MDBModalBody>
+                        <pre>{JSON.stringify(user_list)}</pre>
+                    </MDBModalBody>
+                <MDBModalFooter>
+                    <MDBBtn color="secondary" onClick={toggle}>Close</MDBBtn>
+                    <MDBBtn color="primary">Save changes</MDBBtn>
+                </MDBModalFooter>
+            </MDBModal>
+
         </div>
     )
 }
