@@ -6,16 +6,17 @@ import Routes from "./components/Router"
 
 import {Provider} from "react-redux"
 import {store} from "./redux/store"
-
+import Message from "./components/Message"
 function App() {
   return (
       
-      // <div className="App">
-          <Provider store = {store}>
-              <Routes />
-          </Provider>
+    <Provider store = {store}>
+         <Message />
           
-  //  </div>
+    </Provider>
+   // 
+          //     <Routes />
+          // 
   );
 }
 

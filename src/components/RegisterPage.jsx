@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useRef} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import {signup_action} from "../redux/action_reducer/action"
@@ -8,6 +8,9 @@ let RegisterPage = () =>{
     useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
+      let btnRef  = useRef()
+      let [disable, setdisable] = useState(false)
+
     const usedispatch = useDispatch();
     let history = useHistory()
     let [userdata, setuserdata] = useState({fname: '',lname: '',email: '',city: '',state: '', zip: '', password:'',confirmPassword:''});
@@ -23,6 +26,10 @@ let RegisterPage = () =>{
     let changeHandler = (event) => {
         setuserdata({ 
             ...userdata, [event.target.name]: event.target.value })
+    }
+    let handleCheckbox =(event) =>{
+
+        console.log("sascascasc", btnRef)
     }
     return(
         <MDBContainer className="mt-10">
@@ -183,6 +190,8 @@ let RegisterPage = () =>{
                                 value=''
                                 id='invalidCheck'
                                 required
+    
+                                onClick = {handleCheckbox}
                             />
                             <label className='custom-control-label' htmlFor='invalidCheck'>
                                 Agree to terms and conditions
@@ -192,8 +201,8 @@ let RegisterPage = () =>{
                             </div>
                         </div>
                     </MDBCol>
-                    <MDBBtn color='primary' type='submit'>
-                        Submit Form
+                    <MDBBtn color='primary' type='submit' ref = {btnRef} disabled = {disable}>
+                        Submit Form 
                     </MDBBtn>
                 </form>
                 
