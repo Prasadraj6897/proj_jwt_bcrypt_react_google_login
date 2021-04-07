@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {withStyles, createMuiTheme} from '@material-ui/core/styles';
 import {makeStyles} from '@material-ui/styles';
 import Typograpy from "@material-ui/core/Typography/Typography"
@@ -6,11 +6,21 @@ import Button from "@material-ui/core/Button/Button"
 import TextField from "@material-ui/core/TextField/TextField"
 import Paper from "@material-ui/core/Paper/Paper"
 import FileBase from "react-file-base64"
-import {put_Posts_ACTION} from "../../redux/action_reducer/post.action"
-import {useDispatch} from "react-redux"
+import {put_Posts_ACTION, update_Posts_ACTION} from "../../redux/action_reducer/post.action"
+import {useDispatch, useSelector} from "react-redux"
 
-let Forms =() =>{
-  // const 
+let Forms =({currentId, setCurrentId}) =>{
+	
+	const [postData , setpostData] = useState({creator:'', title:'', message:'', tags:'', selectedFile:''})
+	const posts = useSelector((state) => currentId ? state.post_root_reducer.find((p) => p._id === currentId) : null) 
+	
+	useEffect(()=>{
+	if(posts)
+	{
+		setpostData(posts)
+	}
+  },[posts])
+ 
   const useStyles = makeStyles({
     root: {
         '& .MuiTextField-root': {
@@ -35,20 +45,36 @@ let Forms =() =>{
   });
     const classes = useStyles()
 	const dispatch = useDispatch()
-	const [postData , setpostData] = useState({creator:'', title:'', message:'', tags:'', selectedFile:''})
+	
     const handleSubmit = (e) =>{
 		e.preventDefault()
-		dispatch(put_Posts_ACTION(postData))
+		if(currentId)
+		{
+			dispatch(update_Posts_ACTION(currentId, postData))
+			clear();
+		}
+		else
+		{
+			dispatch(put_Posts_ACTION(postData))
+			clear();
+		}
+		
+		
     }
 	const clear = () =>{
+		setCurrentId(null)
 		
+		postData.selectedFile.base64 = ""
+		
+		postData.selectedFile.name = ""
+		setpostData({creator:'', title:'', message:'', tags:'',selectedFile:""})
 	}
   return(
      
       <Paper className = {classes.paper}>
         <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit = {handleSubmit}>
 			<Typograpy variant = "h6" >
-				Creating a memory
+				{currentId ? "Editing a memory" : "Creating a memory"}
 			</Typograpy>
 			<TextField 
 				name="Creator"
@@ -80,9 +106,9 @@ let Forms =() =>{
 				label="Tags"
 				fullWidth
 				value={postData.tags}
-				onChange = {(e)=>setpostData({...postData, tags:e.target.value})}
+				onChange = {(e)=>setpostData({...postData, tags:e.target.value.split(',')})}
 			/>
-			
+			{/* // above split is used in e.target.value in onchange tags */}
 			<div className = {classes.fileInput}>
 				<FileBase 
 					type="file"

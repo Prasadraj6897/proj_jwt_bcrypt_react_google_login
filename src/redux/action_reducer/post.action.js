@@ -1,6 +1,10 @@
 import axios from "axios"
 const GETPOSTS = "GETPOSTS";
 const PUTPOSTS = "PUTPOSTS";
+const UPDATEPOSTS = "UPDATEPOSTS";
+const DELETEPOSTS = "DELETEPOSTS";
+const LIKEPOSTS = "LIKEPOSTS";
+
 const url = "http://localhost:5000/posts"
 
 // const fetchposts = () =>axios.get(url)
@@ -24,10 +28,10 @@ let put_Posts_ACTION = (newposts) => {
     return async (dispatch) => {
         
         try{
-            console.log("url", url)
+            // console.log("url", url)
             let response = await axios.post("http://localhost:5000/posts", newposts);
             let payload = response.data
-            console.log("payload", response)
+            
             dispatch({type : PUTPOSTS, payload:payload})
         }catch(error){
 
@@ -35,31 +39,55 @@ let put_Posts_ACTION = (newposts) => {
     } 
 }
 
-// export const put_Posts_ACTION = (newposts) => async (dispatch) => {
-//     try {
-//       const { data } =await axios.post("http://localhost:5000/posts", newposts);
-  
-//       dispatch({ type: PUTPOSTS, payload: data });
-      
-    //   axios.post(url, newposts).then(res => {
-    //       console.log("scsdcwc",res.data)
-    //     dispatch({ type: PUTPOSTS, payload: res.data });
-    //   });
-    // axios({
-    //     method: "POST",
-    //     url: "http://localhost:5000/posts",
-    //     newposts,
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     }
-    //   }).then(res => {
-    //     console.log(res.data);
-    //   });
+let update_Posts_ACTION = (id, updateposts) => {
+    
+    return async (dispatch) => {
+        
+        try{
+            // console.log("url", url)
+            let response = await axios.patch("http://localhost:5000/posts"+ '/' + id, updateposts);
+            let payload = response.data
+            
+            dispatch({type : UPDATEPOSTS, payload:payload})
+        }catch(error){
 
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+        }
+    } 
+}
+
+let Delete_Posts_ACTION = (id) => {
+    
+    return async (dispatch) => {
+        
+        try{
+            
+             await axios.delete("http://localhost:5000/posts"+ '/' + id);
+             
+            
+            dispatch({type : DELETEPOSTS, payload:id})
+        }catch(error){
+
+        }
+    } 
+}
+
+let Like_Posts_ACTION = (id) => {
+    
+    return async (dispatch) => {
+        
+        try{
+            
+             const {data} = await axios.patch("http://localhost:5000/posts"+ '/' + id + '/' + 'likepost');
+           
+            //  console.log("url", "http://localhost:5000/posts"+ '/' + id + '/' + 'likepost')
+            dispatch({type : LIKEPOSTS, payload:data})
+        }catch(error){
+
+        }
+    } 
+}
 
 
-export {GETPOSTS, getPosts_ACTION, put_Posts_ACTION, PUTPOSTS}
+
+
+export {GETPOSTS, PUTPOSTS,UPDATEPOSTS,DELETEPOSTS,LIKEPOSTS, getPosts_ACTION, put_Posts_ACTION, update_Posts_ACTION, Delete_Posts_ACTION, Like_Posts_ACTION}

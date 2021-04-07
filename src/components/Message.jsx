@@ -14,8 +14,8 @@ import {useDispatch} from "react-redux"
 import {getPosts_ACTION} from "../redux/action_reducer/post.action"
 
 let Message =() =>{
-    
-    const useStyles = makeStyles(theme =>({
+    const [currentId, setCurrentId] = useState(null)
+    const useStyles = makeStyles((theme) =>({
         appBar: {
             borderRadius: 15,
             margin: '30px 0',
@@ -30,12 +30,19 @@ let Message =() =>{
           image: {
             marginLeft: '15px',
           },
+        //   for only mobile(Error of using down)
+        // [theme.breakpoints.down('md')]:{
+        //     mainContainer:{
+        //         flexDirection:"column-reverse"
+        //       }
+        // }
+          
       }));
       const classes = useStyles()
       const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getPosts_ACTION())
-    },[dispatch])
+    },[currentId, dispatch])
     return(
        
         <div className = "container">
@@ -46,12 +53,12 @@ let Message =() =>{
             </AppBar>
             <Grow in>
             <div className = "container">
-                <Grid container justify="space-between" alignItems="stretch" spacing={3}>
+                <Grid container  justify="space-between" alignItems="stretch" spacing={3}>
                     <Grid xs={12} sm={7}>
-                        <Posts_outside_Posts />
+                        <Posts_outside_Posts setCurrentId={setCurrentId}/>
                     </Grid>
                     <Grid xs={12} sm={4}>
-                        <Forms />
+                        <Forms currentId={currentId} setCurrentId={setCurrentId}/>
                     </Grid>
 
                 </Grid>
