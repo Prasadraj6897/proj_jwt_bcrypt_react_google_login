@@ -27,24 +27,24 @@ let Posts_outside_Posts =({setCurrentId}) =>{
   return(
      
       <div className = "container">
-          {/* <h4>Posts_outside_Posts</h4> */}
+          {/* <pre>{JSON.stringify(Posts)}</pre> */}
           {
-            Posts.length < 1 ? <CircularProgress />:
+            !Posts.length ? <CircularProgress />:
             (
               <Grid className = {classes.mainContainer} container alignItems = "stretch" spacing={3} >
                   {
-                    Posts.map((post)=>{
-                        return(
-                          <Grid key={post.id} item xs={12} sm={6}>
+                    Posts.map((post)=>(
+                        
+                          <Grid key={post._id} item xs={12} sm={6}>
                             <Post_inside_Posts post={post} setCurrentId={setCurrentId}/>
                           </Grid>
                         )
-                    })
+                    )
                   }
               </Grid>
             )
 
-          }
+          } 
         </div>
   )
 }

@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 
 // put js must because it wont work
 import PostMethod from "./router/posts.js"
+import UserMethod from "./router/usersroutes.js"
 
 // const cors = require('cors');
 // const express = require('express');
@@ -34,6 +35,8 @@ app.use(function(req, res, next) {
 //   });
 
 app.use('/posts', PostMethod);
+app.use('/users', UserMethod);
+
 const port = process.env.PORT || 5000;
 
 // const CONNECTION_URL = "mongodb+srv://Prasad_Database:Prasad_Databse123@cluster0.1qfop.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"

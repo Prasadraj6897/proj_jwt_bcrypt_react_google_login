@@ -6,14 +6,15 @@ import Routes from "./components/Router"
 
 import {Provider} from "react-redux"
 import {store} from "./redux/store"
-import Message from "./components/Message"
+import UserRouter from "./components/userRouter"
 function App() {
   return (
-      
-    <Provider store = {store}>
-         <Message />
-          
-    </Provider>
+     
+                <Provider store = {store}>
+                    <UserRouter />
+                      
+                </Provider>
+              
    // 
           //     <Routes />
           // 

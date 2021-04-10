@@ -8,7 +8,8 @@ let initial_state  = {
 let post_reducer = (state = [], action) =>{
     console.log("action", action)
     switch(action.type){
-        case GETPOSTS :           
+        case GETPOSTS : 
+            console.log("GETPOSTS", action.payload)          
             return action.payload
             
         case PUTPOSTS :           

@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux"
 
 let Forms =({currentId, setCurrentId}) =>{
 	
-	const [postData , setpostData] = useState({creator:'', title:'', message:'', tags:'', selectedFile:''})
+	const [postData , setpostData] = useState({ title:'', message:'', tags:'', selectedFile:''})
 	const posts = useSelector((state) => currentId ? state.post_root_reducer.find((p) => p._id === currentId) : null) 
 	
 	useEffect(()=>{
@@ -45,17 +45,18 @@ let Forms =({currentId, setCurrentId}) =>{
   });
     const classes = useStyles()
 	const dispatch = useDispatch()
-	
+	const user = JSON.parse(localStorage.getItem('profile'))
+
     const handleSubmit = (e) =>{
 		e.preventDefault()
 		if(currentId)
 		{
-			dispatch(update_Posts_ACTION(currentId, postData))
+			dispatch(update_Posts_ACTION(currentId, {...postData, name: user?.result?.name}))
 			clear();
 		}
 		else
 		{
-			dispatch(put_Posts_ACTION(postData))
+			dispatch(put_Posts_ACTION({...postData, name: user?.result?.name}))
 			clear();
 		}
 		
@@ -67,7 +68,17 @@ let Forms =({currentId, setCurrentId}) =>{
 		postData.selectedFile.base64 = ""
 		
 		postData.selectedFile.name = ""
-		setpostData({creator:'', title:'', message:'', tags:'',selectedFile:""})
+		setpostData({ title:'', message:'', tags:'',selectedFile:""})
+	}
+	if(!user?.result?.name){
+		return(
+			<Paper className = {classes.paper}>
+				<Typograpy variant = "h6" align='center'>
+					Please Sign in to create posts
+				</Typograpy>
+			</Paper>
+		)
+
 	}
   return(
      
@@ -76,14 +87,14 @@ let Forms =({currentId, setCurrentId}) =>{
 			<Typograpy variant = "h6" >
 				{currentId ? "Editing a memory" : "Creating a memory"}
 			</Typograpy>
-			<TextField 
+			{/* <TextField 
 				name="Creator"
 				variant = "outlined"
 				label="Creator"
 				fullWidth
 				value={postData.creator}
 				onChange = {(e)=>setpostData({...postData, creator:e.target.value})}
-				/>
+				/> */}
 			<TextField 
 				name="Title"
 				variant = "outlined"
@@ -119,7 +130,7 @@ let Forms =({currentId, setCurrentId}) =>{
 				
 			</div>
 			<Button className = {classes.buttonSubmit} variant="contained" color="primary" size="large" type= "Submit" fullWidth> Submit </Button>
-			<Button variant="contained" color="warning" size="smaill" onClick= {clear} fullWidth> Clear </Button>
+			<Button variant="contained" color="default" size="small" onClick= {clear} fullWidth> Clear </Button>
 		</form>
 
       </Paper>
