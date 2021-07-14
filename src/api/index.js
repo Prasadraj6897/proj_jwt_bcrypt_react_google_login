@@ -11,7 +11,7 @@ API.interceptors.request.use((req) => {
 });
 
 export const getPosts_ACTION = () => API.get('/posts');
-export const fetchPostsBySearch = (searchQuery) => API.get(`/posts/search?searchQuery=${searchQuery.search || null}&tags=${searchQuery.tags}`);
+export const fetchPostsBySearch = (searchQuery) => API.get(`/posts/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`);
 
 export const put_Posts_ACTION = (newposts) => API.post('/posts', newposts);
 export const Like_Posts_ACTION = (id) => API.patch(`/posts/${id}/likepost`);

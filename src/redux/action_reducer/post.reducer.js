@@ -9,7 +9,7 @@ let post_reducer = (state = [], action) =>{
     console.log("action", action)
     switch(action.type){
         case GETPOSTS : 
-            console.log("GETPOSTS", action.payload)          
+            // console.log("GETPOSTS", action.payload)          
             return action.payload
             
         case PUTPOSTS :           
@@ -26,7 +26,7 @@ let post_reducer = (state = [], action) =>{
             return state.map((post) => post._id === action.payload._id ? action.payload : post)
 
         case GET_POSTS_BY_SEARCH:
-            return [ ...state, action.payload.data ];
+            return action.payload.data 
 
         default:
             return state;

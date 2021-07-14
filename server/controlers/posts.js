@@ -6,7 +6,7 @@ export const getPosts = async (req, res)=>{
     // console.log("sgcvkajhkjkas jashckash")
     try{
         const postMsg = await PostMessage.find()
-        console.log(postMsg)
+        // console.log(postMsg)
         res.status(200).json(postMsg)
     }
     catch(error){
@@ -84,4 +84,18 @@ export const likePosts = async (req, res)=>{
     
     res.json(likePost)
    
+}
+
+export const getPostsBySearch = async (req, res) => {
+    const { searchQuery, tags } = req.query;
+
+    try {
+        const title = new RegExp(searchQuery, "i");
+
+        const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});
+
+        res.json({ data: posts });
+    } catch (error) {    
+        res.status(404).json({ message: error.message });
+    }
 }
