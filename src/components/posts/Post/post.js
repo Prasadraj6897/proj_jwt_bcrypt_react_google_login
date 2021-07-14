@@ -89,11 +89,11 @@ let Post_inside_Posts = (props) =>{
                 </CardContent>
 			</ButtonBase>
                 <CardActions className={classes.cardActions}>
-                    <Button size="small" color='inherit' disabled={!user?.result} onClick={()=>dispatch(Like_Posts_ACTION(props.post._id))}>
+                    <Button size="small" color='primary' disabled={!user?.result} onClick={()=>dispatch(Like_Posts_ACTION(props.post._id))}>
                         <Likes />
                     </Button>
                     {(user?.result?.googleId === props.post?.creator || user?.result?._id === props.post?.creator) && (
-                      <Button size="small" color='inherit' onClick={()=>dispatch(Delete_Posts_ACTION(props.post._id))}>
+                      <Button size="small" color='secondary' onClick={()=>dispatch(Delete_Posts_ACTION(props.post._id))}>
                           <DeleteIcon fontSize="small"/>
                               Delete
                       </Button>
