@@ -5,9 +5,13 @@ import Typography from "@material-ui/core/Typography/Typography"
 import  Grid from "@material-ui/core/Grid/Grid"
 import Paper from "@material-ui/core/Paper/Paper"
 import Container from "@material-ui/core/Container/Container"
+
 import useStyles from "./styles"
+
 import  LockOutlined  from '@material-ui/icons/LockOutlined'
+
 import Input from "./Input"
+
 import {GoogleLogin} from "react-google-login"
 import Icon from "./Icon"
 import {useDispatch} from "react-redux"
@@ -15,6 +19,7 @@ import {google_auth_actions, signup_action, login_action} from "../../redux/acti
 import {useHistory} from "react-router-dom"
 
 const initialState = {firstname:'', secondname:'', email:'', password:'', confirmpassword : ''}
+
 const Auth = () => {
     const state = null;
     const classes = useStyles()

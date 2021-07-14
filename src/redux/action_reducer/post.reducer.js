@@ -1,4 +1,4 @@
-import {GETPOSTS, PUTPOSTS, UPDATEPOSTS, DELETEPOSTS, LIKEPOSTS} from "./post.action"
+import {GET_POSTS_BY_SEARCH, GETPOSTS, PUTPOSTS, UPDATEPOSTS, DELETEPOSTS, LIKEPOSTS, START_LOADING, END_LOADING} from "./post.action"
 
 let initial_state  = {
     data : [],
@@ -24,6 +24,10 @@ let post_reducer = (state = [], action) =>{
 
         case LIKEPOSTS :           
             return state.map((post) => post._id === action.payload._id ? action.payload : post)
+
+        case GET_POSTS_BY_SEARCH:
+            return [ ...state, action.payload.data ];
+
         default:
             return state;
     }

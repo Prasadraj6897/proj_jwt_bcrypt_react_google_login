@@ -6,6 +6,9 @@ const PUTPOSTS = "PUTPOSTS";
 const UPDATEPOSTS = "UPDATEPOSTS";
 const DELETEPOSTS = "DELETEPOSTS";
 const LIKEPOSTS = "LIKEPOSTS";
+const GET_POSTS_BY_SEARCH = "GET_POSTS_BY_SEARCH";
+const START_LOADING = "START_LOADING"
+const END_LOADING = "END_LOADING"
 
 const url = "http://localhost:5000/posts"
 
@@ -26,6 +29,18 @@ let getPosts_ACTION = () => {
         }
     } 
 }
+
+let getPostsBySearch = (searchQuery) => async (dispatch) => {
+    try {
+    //   dispatch({ type: START_LOADING });
+      const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
+  
+      dispatch({ type: GET_POSTS_BY_SEARCH, payload: { data } });
+    //   dispatch({ type: END_LOADING });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 let put_Posts_ACTION = (newposts) => {
     console.log("newposts", newposts)
@@ -98,4 +113,4 @@ let Like_Posts_ACTION = (id) => {
 
 
 
-export {GETPOSTS, PUTPOSTS,UPDATEPOSTS,DELETEPOSTS,LIKEPOSTS, getPosts_ACTION, put_Posts_ACTION, update_Posts_ACTION, Delete_Posts_ACTION, Like_Posts_ACTION}
+export {GET_POSTS_BY_SEARCH, GETPOSTS, PUTPOSTS,UPDATEPOSTS,DELETEPOSTS,LIKEPOSTS,START_LOADING, END_LOADING, getPostsBySearch, getPosts_ACTION, put_Posts_ACTION, update_Posts_ACTION, Delete_Posts_ACTION, Like_Posts_ACTION}
