@@ -21,7 +21,7 @@ let commentPost = (value, id) => async (dispatch) => {
   
       dispatch({ type: COMMENT, payload: data });
   
-      return data.comments;
+      return data.comments; //for automatic update
     } catch (error) {
       console.log(error);
     }
