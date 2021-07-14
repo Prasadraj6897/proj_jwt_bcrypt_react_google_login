@@ -85,7 +85,7 @@ let Post_inside_Posts = (props) =>{
       <div>
         {/* <h4>Posts inside</h4> */}
         	{/* <pre>{JSON.stringify(props.post)}</pre> */}
-			<Card className = {classes.card}>
+			<Card className = {classes.card} raised elevation={6}>
 				<CardMedia className = {classes.media} image={props.post.selectedFile.base64 || 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cameraegg.org%2Fsony-rx1-sample-images%2F&psig=AOvVaw0cHsUArg0HM1M8MJCTVUwE&ust=1618151777330000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLDF06Pz8-8CFQAAAAAdAAAAABAD'}  title = {props.post.title}/>
 				<div className = {classes.overlay}>
                     <Typograpy variant ="h6">

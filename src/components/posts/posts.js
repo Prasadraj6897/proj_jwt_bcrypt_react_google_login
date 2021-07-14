@@ -8,7 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress/CircularProgres
 let Posts_outside_Posts =({setCurrentId}) =>{
  
   const Posts = useSelector((state)=>
-    state.post_root_reducer
+    state.post_root_reducer.posts
   )
   const useStyles = makeStyles({
     
@@ -35,7 +35,7 @@ let Posts_outside_Posts =({setCurrentId}) =>{
                   {
                     Posts.map((post)=>(
                         
-                          <Grid key={post._id} item xs={12} sm={6}>
+                          <Grid key={post._id} item xs={12} sm={12} md={6} lg={4}>
                             <Post_inside_Posts post={post} setCurrentId={setCurrentId}/>
                           </Grid>
                         )

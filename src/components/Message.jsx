@@ -32,9 +32,9 @@ let Message =() =>{
    
       
       const dispatch = useDispatch()
-    useEffect(()=>{
-        dispatch(getPosts_ACTION())
-    },[currentId, dispatch])
+    // useEffect(()=>{
+    //     dispatch(getPosts_ACTION())
+    // },[currentId, dispatch])
 
 	const handleKeyPress = (e) => {
 		if (e.keyCode === 13)  {//ie enter key
@@ -83,7 +83,7 @@ let Message =() =>{
 
 							<Forms currentId={currentId} setCurrentId={setCurrentId}/>
 							<Paper className={classes.pagination} elevation={6}>
-							<Paginate  />
+								<Paginate  page={page}/>
 							</Paper>
 						</Grid>
 						

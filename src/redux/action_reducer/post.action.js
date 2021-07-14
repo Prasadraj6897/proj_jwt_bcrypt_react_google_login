@@ -14,16 +14,17 @@ const url = "http://localhost:5000/posts"
 
 // const fetchposts = () =>axios.get(url)
 
-let getPosts_ACTION = () => {
+let getPosts_ACTION = (page) => {
     // console.log("userdata getPosts_ACTION")
     return async (dispatch) => {
         
         try{
-             
-            const {data}  = await api.getPosts_ACTION();
-            console.log("getPosts_ACTION", data)
+            dispatch({ type: START_LOADING });
+            const { data: { data, currentPage, numberOfPages } } = await api.getPosts_ACTION(page);
+            console.log("getPosts_ACTION", currentPage, numberOfPages)
             
-            dispatch({type : GETPOSTS, payload:data})
+            dispatch({type : GETPOSTS, payload:{ data, currentPage, numberOfPages }})
+            dispatch({ type: END_LOADING });
         }catch(error){
 
         }
