@@ -7,6 +7,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import useStyles from './style';
 import { getPost, getPostsBySearch } from '../../redux/action_reducer/post.action';
 
+import CommentSection from './CommentSection'
 
 const Post = () => {
     const classes = useStyles();
@@ -52,11 +53,9 @@ const Post = () => {
 						<Typography gutterBottom variant="body1" component="p">{post.message}</Typography>
 						<Typography variant="h6">Created by: {post.name}</Typography>
 						<Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
+												
 						<Divider style={{ margin: '20px 0' }} />
-						<Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
-						<Divider style={{ margin: '20px 0' }} />
-						<Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
-						<Divider style={{ margin: '20px 0' }} />
+						<CommentSection post={post} />
 					</div>
 					<div className={classes.imageSection}>
 						<img className={classes.media} src={post.selectedFile.base64 || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />

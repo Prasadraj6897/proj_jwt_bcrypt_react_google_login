@@ -10,9 +10,22 @@ const GET_POSTS_BY_SEARCH = "GET_POSTS_BY_SEARCH";
 const START_LOADING = "START_LOADING"
 const END_LOADING = "END_LOADING"
 const FETCH_POST = 'FETCH_POST'
-const url = "http://localhost:5000/posts"
+const COMMENT = 'COMMENT'
+const url = "http://localhost:5000/posts" 
 
 // const fetchposts = () =>axios.get(url)
+
+let commentPost = (value, id) => async (dispatch) => {
+    try {
+      const { data } = await api.comment(value, id);
+  
+      dispatch({ type: COMMENT, payload: data });
+  
+      return data.comments;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 let getPost = (id) => async (dispatch) => {
     try {
@@ -128,4 +141,4 @@ let Like_Posts_ACTION = (id) => {
 
 
 
-export {GET_POSTS_BY_SEARCH, GETPOSTS, PUTPOSTS,UPDATEPOSTS,DELETEPOSTS,LIKEPOSTS,START_LOADING, END_LOADING, FETCH_POST, getPost, getPostsBySearch, getPosts_ACTION, put_Posts_ACTION, update_Posts_ACTION, Delete_Posts_ACTION, Like_Posts_ACTION}
+export {GET_POSTS_BY_SEARCH, GETPOSTS, PUTPOSTS,UPDATEPOSTS,DELETEPOSTS,LIKEPOSTS,START_LOADING, END_LOADING, FETCH_POST, COMMENT, getPost, getPostsBySearch, getPosts_ACTION, put_Posts_ACTION, update_Posts_ACTION, Delete_Posts_ACTION, Like_Posts_ACTION, commentPost}

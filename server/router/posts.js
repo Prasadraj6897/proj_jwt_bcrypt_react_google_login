@@ -1,7 +1,7 @@
 import express from "express"
 
 //use curly braces it shows error
-import {getPosts, createPosts, updatePosts, deletePosts, likePosts, getPostsBySearch, getPost} from "../controlers/posts.js"
+import {getPosts, createPosts, updatePosts, deletePosts, likePosts, getPostsBySearch, getPost, commentPost} from "../controlers/posts.js"
 
 import authMiddleware from "../middleware/authMiddleware.js"
 
@@ -18,6 +18,7 @@ router.delete('/:id', authMiddleware, deletePosts)
 
 router.patch("/:id/likepost", authMiddleware, likePosts)
 
+router.post('/:id/commentPost', commentPost);
 
 
 export default router;
