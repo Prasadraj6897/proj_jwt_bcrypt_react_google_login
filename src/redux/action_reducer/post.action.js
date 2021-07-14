@@ -9,10 +9,24 @@ const LIKEPOSTS = "LIKEPOSTS";
 const GET_POSTS_BY_SEARCH = "GET_POSTS_BY_SEARCH";
 const START_LOADING = "START_LOADING"
 const END_LOADING = "END_LOADING"
-
+const FETCH_POST = 'FETCH_POST'
 const url = "http://localhost:5000/posts"
 
 // const fetchposts = () =>axios.get(url)
+
+let getPost = (id) => async (dispatch) => {
+    try {
+      dispatch({ type: START_LOADING });
+  
+      const { data } = await api.fetchPost(id);
+  
+      dispatch({ type: FETCH_POST, payload: { post: data } });
+      dispatch({ type: END_LOADING });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
 let getPosts_ACTION = (page) => {
     // console.log("userdata getPosts_ACTION")
@@ -33,11 +47,11 @@ let getPosts_ACTION = (page) => {
 
 let getPostsBySearch = (searchQuery) => async (dispatch) => {
     try {
-    //   dispatch({ type: START_LOADING });
+      dispatch({ type: START_LOADING });
       const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
         console.log(data)
       dispatch({ type: GET_POSTS_BY_SEARCH, payload: { data } });
-    //   dispatch({ type: END_LOADING });
+      dispatch({ type: END_LOADING });
     } catch (error) {
       console.log(error);
     }
@@ -114,4 +128,4 @@ let Like_Posts_ACTION = (id) => {
 
 
 
-export {GET_POSTS_BY_SEARCH, GETPOSTS, PUTPOSTS,UPDATEPOSTS,DELETEPOSTS,LIKEPOSTS,START_LOADING, END_LOADING, getPostsBySearch, getPosts_ACTION, put_Posts_ACTION, update_Posts_ACTION, Delete_Posts_ACTION, Like_Posts_ACTION}
+export {GET_POSTS_BY_SEARCH, GETPOSTS, PUTPOSTS,UPDATEPOSTS,DELETEPOSTS,LIKEPOSTS,START_LOADING, END_LOADING, FETCH_POST, getPost, getPostsBySearch, getPosts_ACTION, put_Posts_ACTION, update_Posts_ACTION, Delete_Posts_ACTION, Like_Posts_ACTION}

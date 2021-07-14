@@ -1,4 +1,4 @@
-import {GET_POSTS_BY_SEARCH, GETPOSTS, PUTPOSTS, UPDATEPOSTS, DELETEPOSTS, LIKEPOSTS, START_LOADING, END_LOADING} from "./post.action"
+import {GET_POSTS_BY_SEARCH, GETPOSTS, PUTPOSTS, UPDATEPOSTS, DELETEPOSTS, LIKEPOSTS, START_LOADING, END_LOADING, FETCH_POST} from "./post.action"
 
 let initial_state  = {
     data : [],
@@ -8,9 +8,9 @@ let initial_state  = {
 let post_reducer = (state = { isLoading: true, posts: [] }, action) =>{
     console.log("action", action)
     switch(action.type){
-        case 'START_LOADING':
+        case START_LOADING:
             return { ...state, isLoading: true };
-        case 'END_LOADING':
+        case END_LOADING:
             return { ...state, isLoading: false };
 
         case GETPOSTS : 
@@ -21,6 +21,9 @@ let post_reducer = (state = { isLoading: true, posts: [] }, action) =>{
                 currentPage: action.payload.currentPage,
                 numberOfPages: action.payload.numberOfPages,
             }
+
+        case FETCH_POST:
+            return { ...state, post: action.payload.post };
             
         case PUTPOSTS :           
             return { ...state, posts: [...state.posts, action.payload] };

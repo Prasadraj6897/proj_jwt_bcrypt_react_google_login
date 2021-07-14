@@ -13,59 +13,15 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from "moment"
 import {useDispatch, useSelector} from "react-redux"
 import {Delete_Posts_ACTION,Like_Posts_ACTION} from "../../../redux/action_reducer/post.action"
+import { ButtonBase } from '@material-ui/core/';
+import useStyles from './style';
+import { useHistory } from 'react-router-dom';
+
 
 let Post_inside_Posts = (props) =>{
-  const dispatch = useDispatch()
-    const useStyles = makeStyles({
-        media: {
-            height: 0,
-            paddingTop: '56.25%',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            backgroundBlendMode: 'darken',
-          },
-          border: {
-            border: 'solid',
-          },
-          fullHeightCard: {
-            height: '100%',
-          },
-          card: {
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            borderRadius: '15px',
-            height: '100%',
-            position: 'relative',
-          },
-          overlay: {
-            position: 'absolute',
-            top: '20px',
-            left: '20px',
-            color: 'white',
-          },
-          overlay2: {
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            color: 'white',
-          },
-          grid: {
-            display: 'flex',
-          },
-          details: {
-            display: 'flex',
-            justifyContent: 'space-between',
-            margin: '20px',
-          },
-          title: {
-            padding: '0 16px',
-          },
-          cardActions: {
-            padding: '0 16px 8px 16px',
-            display: 'flex',
-            justifyContent: 'space-between',
-          },
-      });
+		const dispatch = useDispatch()
+		const history = useHistory()
+   
       const classes = useStyles()
       const user = JSON.parse(localStorage.getItem('profile'))
       
@@ -80,12 +36,26 @@ let Post_inside_Posts = (props) =>{
         }
         return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
   };
+
+  const openPost = (e) => {
+    // dispatch(getPost(post._id, history));
+
+    history.push(`/posts/${props.post._id}`);
+  };
     
     return(
       <div>
         {/* <h4>Posts inside</h4> */}
         	{/* <pre>{JSON.stringify(props.post)}</pre> */}
 			<Card className = {classes.card} raised elevation={6}>
+
+			<ButtonBase
+			component="span"
+			name="test"
+			className={classes.cardAction}
+			onClick={openPost}
+			>
+
 				<CardMedia className = {classes.media} image={props.post.selectedFile.base64 || 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cameraegg.org%2Fsony-rx1-sample-images%2F&psig=AOvVaw0cHsUArg0HM1M8MJCTVUwE&ust=1618151777330000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLDF06Pz8-8CFQAAAAAdAAAAABAD'}  title = {props.post.title}/>
 				<div className = {classes.overlay}>
                     <Typograpy variant ="h6">
@@ -96,13 +66,13 @@ let Post_inside_Posts = (props) =>{
                         {moment(props.post.createdAt).fromNow()} 
                     </Typograpy>
 				</div>
-        {(user?.result?.googleId === props.post?.creator || user?.result?._id === props.post?.creator) && (
-                <div className = {classes.overlay2}>
-                    <Button style={{color:"white"}} size="small" onClick={()=>{props.setCurrentId(props.post._id)}}>
-                        <MoreHorizIcon fontSize="default" />
-                    </Button>
-                </div>
-          )}
+				{(user?.result?.googleId === props.post?.creator || user?.result?._id === props.post?.creator) && (
+						<div className = {classes.overlay2}>
+							<Button style={{color:"white"}} size="small" onClick={()=>{props.setCurrentId(props.post._id)}}>
+								<MoreHorizIcon fontSize="default" />
+							</Button>
+						</div>
+				)}
 
 				<div className = {classes.details}>
 					<Typograpy variant ="body2" color="textSecondary">
@@ -117,6 +87,7 @@ let Post_inside_Posts = (props) =>{
                         {props.post.message}
                     </Typograpy>
                 </CardContent>
+			</ButtonBase>
                 <CardActions className={classes.cardActions}>
                     <Button size="small" color='inherit' disabled={!user?.result} onClick={()=>dispatch(Like_Posts_ACTION(props.post._id))}>
                         <Likes />

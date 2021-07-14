@@ -24,12 +24,17 @@ let Posts_outside_Posts =({setCurrentId}) =>{
       },
   });
     const classes = useStyles()
+
+    if(!Posts.length && !Posts.isLoading)
+    {
+      return 'No Posts';
+    }
   return(
      
       <div className = "container">
           {/* <pre>{JSON.stringify(Posts)}</pre> */}
           {
-            !Posts.length ? <CircularProgress />:
+            Posts.isLoading ? <CircularProgress />:
             (
               <Grid className = {classes.mainContainer} container alignItems = "stretch" spacing={3} >
                   {

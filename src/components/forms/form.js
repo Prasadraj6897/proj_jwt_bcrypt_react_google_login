@@ -12,7 +12,7 @@ import {useDispatch, useSelector} from "react-redux"
 let Forms =({currentId, setCurrentId}) =>{
 	
 	const [postData , setpostData] = useState({ title:'', message:'', tags:'', selectedFile:''})
-	const posts = useSelector((state) => currentId ? state.post_root_reducer.find((p) => p._id === currentId) : null) 
+	const posts = useSelector((state) => currentId ? state.post_root_reducer.posts.find((p) => p._id === currentId) : null) 
 	
 	useEffect(()=>{
 	if(posts)
